@@ -133,6 +133,52 @@ public class toDoListController implements Initializable {
          */
     }
 
+    @FXML
+    void saveList(ActionEvent event) {
+        /*
+        call function fileSaver();
+         */
+    }
+
+    @FXML
+    void loadList(ActionEvent event) {
+        /*
+        call function fileLoader();
+         */
+    }
+
+    public void fileSaver() {
+        /*
+        declare an observable list and have it get the selected items.
+        start try
+            declare a pathway for new FileWriter inside a new BufferedWriter inside a new PrintWriter.
+                **(the path utilized for this project was "C:\\Users\\easto\\IdeaProjects\\vitulli-cop3330
+                -assignment\\src\\main\\resources\\txt files\\todolists.txt" and the appropriate directory
+                is attached in my repository for when my project is fully functional.
+            start for loop at i equals zero and continue as long as i is less than the size of the
+            array incrementing by 1
+                get i of the array and save in the value items
+                write item to file
+            close file
+         */
+    }
+
+    public void fileLoader() {
+        /*
+        start try
+            declare a pathway for FileReader. declare buffered reader with filereader.
+                **(the path utilized for this project was "C:\\Users\\easto\\IdeaProjects\\vitulli-cop3330
+                -assignment\\src\\main\\resources\\txt files\\todolists.txt" and the appropriate directory
+                is attached in my repository for when my project is fully functional.
+            set a string line to empty.
+
+            start while loop if buffered reader line contains content
+                declare new to do list and get the text content from the listsTextField.
+                get the items stored within that to do list and store within new todolist.
+         */
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
          /*

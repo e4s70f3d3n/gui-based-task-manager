@@ -52,7 +52,6 @@
             </columns>
         </TableView>
         <Pane prefHeight="66.0" prefWidth="794.0" style="-fx-background-color: #98A975;" />
-        <Button fx:id="backToListButton" layoutX="14.0" layoutY="66.0" mnemonicParsing="false" onAction="#backToList" prefHeight="25.0" prefWidth="88.0" text="Back to List" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="70.0" />
         <MenuButton fx:id="filterItemsMenuButton" layoutX="695.0" layoutY="66.0" mnemonicParsing="false" onAction="#filterItems" text="Filter Items" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="70.0">
             <items>
                 <MenuItem fx:id="showCompletedMenuButton" mnemonicParsing="false" onAction="#showCompletedFilter" text="Show Completed Only" />
@@ -61,7 +60,7 @@
             </items>
         </MenuButton>
       <DatePicker fx:id="datePicker" layoutX="295.0" layoutY="487.0" prefHeight="25.0" prefWidth="119.0" promptText="Enter due date" AnchorPane.bottomAnchor="18.0" />
-      <TextField fx:id="itemDescriptionTextField" layoutX="422.0" layoutY="487.0" onAction="#itemDescription" prefHeight="25.0" prefWidth="357.0" promptText="Enter item description" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="itemDescriptionTextField" layoutX="422.0" layoutY="487.0" prefHeight="25.0" prefWidth="357.0" promptText="Enter item description" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="removeItemButton" layoutX="123.0" layoutY="487.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="88.0" text="Remove Item" AnchorPane.bottomAnchor="18.0" />
       <Button fx:id="addItemButton" layoutX="220.0" layoutY="487.0" mnemonicParsing="false" onAction="#addItem" text="Add Item" AnchorPane.bottomAnchor="18.0" />
       <Button fx:id="checkCompleteButton" layoutX="14.0" layoutY="487.0" mnemonicParsing="false" onAction="#checkComplete" text="Item Completed" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="14.0" />

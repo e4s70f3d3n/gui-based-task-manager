@@ -25,14 +25,14 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         lists = new ArrayList<>();
-        scene = new Scene(viewHome());
+        scene = new Scene(viewToDoList());
         stage.setScene(scene);
         stage1 = stage;
         stage.show();
     }
 
-    public static Parent viewHome() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/lists.fxml"));
+    public static Parent viewToDoList() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/todolist.fxml"));
         Parent parent = fxmlLoader.load();
         return parent;
     }
