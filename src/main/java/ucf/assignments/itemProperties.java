@@ -5,60 +5,77 @@
 
 package ucf.assignments;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 import java.io.Serializable;
 
 public class itemProperties implements Serializable {
 
+    private StringProperty itemDescription;
+    private StringProperty dueDate;
+    private BooleanProperty completed;
+
     /*
-    declare all variables used in the class (i.e. SimpleStringProperty itemDescription,
-    SimpleStringProperty dueDate, and SimpleStringProperty completed) designating each as private.
+    declare all variables used in the class (i.e. StringProperty itemDescription,
+    StringProperty dueDate, and BooleanProperty completed) designating each as private.
     */
 
+
     public itemProperties(String itemDescription, String dueDate) {
+        this.itemDescription = new SimpleStringProperty(itemDescription);
+        this.dueDate = new SimpleStringProperty(dueDate);
+        this.completed = new SimpleBooleanProperty(false);
         /*
-        the constructor to initialize and assign itemDescription, dueDate, and
-        set completed to uncompleted.
+        constructor to initialize and assign itemDescription, dueDate,
+        and completed to uncompleted.
         */
     }
 
+    // getter to return itemDescription value
     public String getItemDescription() {
-        /*
-        getter to return itemDescription value.
-        */
-        return "";
+        return itemDescription.get();
     }
 
-    public void setItemDescription(String cutoff) {
-         /*
-        setter to initialize this.itemDescription.
-        */
+    // setter to initialize this.itemDescription.
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription.set(itemDescription);
     }
 
+    // getter to return dueDate value.
     public String getDueDate() {
-        /*
-        getter to return dueDate value.
-        */
-        return "";
+        return dueDate.get();
     }
 
+    // setter to initialize this.dueDate.
     public void setDueDate(String dueDate) {
-         /*
-        setter to initialize this.dueDate.
-        */
+        this.dueDate.set(dueDate);
     }
 
-    public String getCompleted() {
-        /*
-        getter to return completed value.
-        */
-        return "";
+    // getter to return completed value.
+    public boolean isCompleted() {
+        return completed.get();
     }
 
-    public void setCompleted() {
-        /*
-        setter to initialize this.completed.
-        */
+    // setter to initialize this.completed.
+    public void setCompleted(boolean completed) {
+        this.completed.set(completed);
+    }
+
+    // property listening and binding itemDescription.
+    public StringProperty itemDescriptionProperty() {
+        return itemDescription;
+    }
+
+    // property listening and binding dueDate.
+    public StringProperty dueDateProperty() {
+        return dueDate;
+    }
+
+    // property listening and binding completed.
+    public BooleanProperty completedProperty() {
+        return completed;
     }
 }

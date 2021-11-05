@@ -26,7 +26,7 @@ public class toDoListController implements Initializable {
     private Button backToListButton;
 
     @FXML
-    private TableColumn<itemProperties, String> completedColumn;
+    private TableColumn<itemProperties, Boolean> completedColumn;
 
     @FXML
     private DatePicker datePicker;
