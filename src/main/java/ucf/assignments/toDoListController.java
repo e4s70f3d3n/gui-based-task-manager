@@ -5,12 +5,21 @@
 
 package ucf.assignments;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class toDoListController implements Initializable {
@@ -58,9 +67,9 @@ public class toDoListController implements Initializable {
     @FXML
     private MenuItem sortByDueDateMenuButton;
 
-    /*
-    declare additional tableview and lists used for functions like TableView<itemProperties> selectedItems.
-     */
+    public ObservableList<itemProperties> toDoList = FXCollections.observableArrayList();
+    public ObservableList<itemProperties> completedToDoList = FXCollections.observableArrayList();
+    public TableView<itemProperties> itemListCompleted = new TableView<>();
 
     @FXML
     void addItem(ActionEvent event) {
@@ -71,15 +80,43 @@ public class toDoListController implements Initializable {
         fill in date into the datePicker.
         reset listsTextField
          */
+
+        itemProperties newItem = new itemProperties(itemDescriptionTextField.getText(), formatDueDate(datePicker));
+        itemList.getItems().add(newItem);
+        itemDescriptionTextField.setText("");
+        datePicker.setValue(LocalDate.now());
     }
 
-    @FXML
-    void backToList(ActionEvent event) {
-        /*
-        set backToListButton onAction and use lambda
-        get scene, set root, FXMLLoader, load the class and resource, access lists.fxml file
-        check with IOException
-         */
+    public String formatDueDate(DatePicker datePicker) {
+        String updatedFormat = "yyyy-MM-dd";
+
+        datePicker.setPromptText(updatedFormat.toLowerCase(Locale.ROOT));
+        datePicker.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(updatedFormat);
+
+            @Override
+            public String toString(LocalDate object) {
+                if (object != null) {
+                    return dateTimeFormatter.format(object);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateTimeFormatter);
+                } else {
+                    return null;
+                }
+            }
+        });
+        return datePicker.getValue().format(DateTimeFormatter.ofPattern(updatedFormat));
+    }
+
+    public void isDueDateValid() {
+
     }
 
     @FXML
@@ -187,5 +224,16 @@ public class toDoListController implements Initializable {
         set table so cells are editable.
         initialize the text field of the cells in the tableview.
          */
+        completedColumn.setCellValueFactory(new PropertyValueFactory<>("completed"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("itemDescription"));
+        dueDateColumn.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+
+        itemList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        itemList.setItems(toDoList);
+        itemList.setEditable(true);
+
+        descriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        dueDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
     }
 }

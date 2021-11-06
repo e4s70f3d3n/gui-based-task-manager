@@ -18,13 +18,11 @@ import java.util.List;
 
 public class App extends Application {
 
-    public static List<toDoList> lists = new ArrayList<>();
     private static Scene scene;
     public static Stage stage1;
 
     @Override
     public void start(Stage stage) throws IOException {
-        lists = new ArrayList<>();
         scene = new Scene(viewToDoList());
         stage.setScene(scene);
         stage1 = stage;
