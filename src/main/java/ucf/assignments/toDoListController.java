@@ -15,12 +15,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -133,7 +131,8 @@ public class toDoListController implements Initializable {
 
     @FXML
     void clearList(ActionEvent event) {
-
+        // retrieves all items from tableview toDoList and clears it.
+        itemList.getItems().clear();
     }
 
     @FXML
@@ -149,6 +148,9 @@ public class toDoListController implements Initializable {
         declare list of selected items
         get selected items and remove them from list
         */
+
+        itemProperties selectedItem = itemList.getSelectionModel().getSelectedItem();
+        itemList.getItems().remove(selectedItem);
     }
 
     @FXML
@@ -162,7 +164,7 @@ public class toDoListController implements Initializable {
 
     @FXML
     void showUncompletedFilter(ActionEvent event) {
-         /*
+        /*
         declare a new list
         for all items that do not have completed values marked, add to new list.
         display new uncompleted list in table view.
