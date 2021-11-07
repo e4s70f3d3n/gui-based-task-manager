@@ -15,7 +15,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.URL;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
@@ -32,7 +34,7 @@ public class toDoListController implements Initializable {
     private Button addItemButton;
 
     @FXML
-    private Button backToListButton;
+    private Button clearListButton;
 
     @FXML
     private TableColumn<itemProperties, Boolean> completedColumn;
@@ -72,7 +74,7 @@ public class toDoListController implements Initializable {
     public TableView<itemProperties> itemListCompleted = new TableView<>();
 
     @FXML
-    void addItem(ActionEvent event) {
+    void addItem(ActionEvent event) throws ParseException {
          /*
         use the text from itemDescriptionTextField to create a new item description.
         use the value from the datePicker to get the date. convert it to a string with format of YYYY-MM-DD.
@@ -81,13 +83,17 @@ public class toDoListController implements Initializable {
         reset listsTextField
          */
 
-        itemProperties newItem = new itemProperties(itemDescriptionTextField.getText(), formatDueDate(datePicker));
-        itemList.getItems().add(newItem);
-        itemDescriptionTextField.setText("");
-        datePicker.setValue(LocalDate.now());
+        if (!datePicker.getValue().isBefore(LocalDate.now()) & itemDescriptionTextField.getText().length() < 257 &
+                itemDescriptionTextField.getText().length() > 0) {
+
+            itemProperties newItem = new itemProperties(itemDescriptionTextField.getText(), formatDueDate(datePicker));
+            itemList.getItems().add(newItem);
+            itemDescriptionTextField.setText("");
+            datePicker.setValue(LocalDate.now());
+        }
     }
 
-    public String formatDueDate(DatePicker datePicker) {
+    public String formatDueDate(DatePicker datePicker) throws ParseException {
         String updatedFormat = "yyyy-MM-dd";
 
         datePicker.setPromptText(updatedFormat.toLowerCase(Locale.ROOT));
@@ -115,10 +121,6 @@ public class toDoListController implements Initializable {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern(updatedFormat));
     }
 
-    public void isDueDateValid() {
-
-    }
-
     @FXML
     void checkComplete(ActionEvent event) {
         /*
@@ -127,6 +129,11 @@ public class toDoListController implements Initializable {
         mark selected items as complete
         add selected items again
          */
+    }
+
+    @FXML
+    void clearList(ActionEvent event) {
+
     }
 
     @FXML
