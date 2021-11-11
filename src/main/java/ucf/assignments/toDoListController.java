@@ -180,6 +180,10 @@ public class toDoListController implements Initializable {
 
         // display all items on the list.
 
+        itemList.setItems(filteredList);
+        filteredList.setPredicate(null);
+        itemList.setItems(toDoList);
+
     }
 
     @FXML
