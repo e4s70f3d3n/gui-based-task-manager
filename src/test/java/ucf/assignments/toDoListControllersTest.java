@@ -39,10 +39,8 @@ class toDoListControllersTest {
     public static Stage stage1;
     @FXML
     private TableColumn<itemProperties, Boolean> completedColumn;
-
     @FXML
     private TableColumn<itemProperties, String> descriptionColumn;
-
     @FXML
     private TableColumn<itemProperties, String> dueDateColumn;
 
@@ -83,7 +81,10 @@ class toDoListControllersTest {
 
     @Test
     void testDatePicker(FxRobot fxRobot) {
-
+        fxRobot.moveTo(770, 600);
+        fxRobot.clickOn(770, 600);
+        fxRobot.moveTo(750, 540);
+        fxRobot.clickOn(750, 540);
     }
 
     @Test
