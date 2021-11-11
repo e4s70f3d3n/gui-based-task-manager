@@ -63,7 +63,7 @@
       <TextField fx:id="itemDescriptionTextField" layoutX="422.0" layoutY="487.0" prefHeight="25.0" prefWidth="357.0" promptText="Enter item description" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="removeItemButton" layoutX="123.0" layoutY="487.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="88.0" text="Remove Item" AnchorPane.bottomAnchor="18.0" />
       <Button fx:id="addItemButton" layoutX="220.0" layoutY="487.0" mnemonicParsing="false" onAction="#addItem" text="Add Item" AnchorPane.bottomAnchor="18.0" />
-      <Button fx:id="checkCompleteButton" layoutX="14.0" layoutY="487.0" mnemonicParsing="false" onAction="#checkComplete" text="Item Completed" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="showEntireListButton" layoutX="14.0" layoutY="487.0" mnemonicParsing="false" onAction="#showEntireList" text="Show Entire List" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="14.0" />
       <Button fx:id="clearListButton" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#clearList" prefHeight="25.0" prefWidth="91.0" text="Clear List" AnchorPane.leftAnchor="14.0" />
     </children>
 </AnchorPane>

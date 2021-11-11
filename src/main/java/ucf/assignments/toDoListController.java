@@ -5,12 +5,16 @@
 
 package ucf.assignments;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
@@ -21,6 +25,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class toDoListController implements Initializable {
 
@@ -62,10 +67,15 @@ public class toDoListController implements Initializable {
     private MenuItem showCompletedMenuButton;
 
     @FXML
+    private Button showEntireListButton;
+
+    @FXML
     private MenuItem showUncompletedMenuButton;
 
     @FXML
     private MenuItem sortByDueDateMenuButton;
+
+    private SimpleBooleanProperty completed;
 
     public ObservableList<itemProperties> toDoList = FXCollections.observableArrayList();
     public ObservableList<itemProperties> completedToDoList = FXCollections.observableArrayList();
@@ -119,14 +129,8 @@ public class toDoListController implements Initializable {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern(updatedFormat));
     }
 
-    @FXML
-    void checkComplete(ActionEvent event) {
-        /*
-        declare list of selected items
-        get selected items and remove them
-        mark selected items as complete
-        add selected items again
-         */
+    void changeCompleted() {
+
     }
 
     @FXML
@@ -140,6 +144,7 @@ public class toDoListController implements Initializable {
         /*
         default displays all items but menu button allows for access to filters.
          */
+
     }
 
     @FXML
@@ -160,6 +165,7 @@ public class toDoListController implements Initializable {
         for all items that do have completed values marked, add to new list.
         display new completed list in table view.
          */
+
     }
 
     @FXML
@@ -243,6 +249,6 @@ public class toDoListController implements Initializable {
 
         descriptionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         dueDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
+        completedColumn.setCellFactory(CheckBoxTableCell.forTableColumn(completedColumn));
     }
 }

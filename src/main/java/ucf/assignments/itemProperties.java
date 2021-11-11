@@ -35,8 +35,19 @@ public class itemProperties implements Serializable {
     }
 
     // getter to return itemDescription value
-    public String getItemDescription() {
+    public final String getItemDescription() {
         return itemDescription.get();
+    }
+
+
+    // getter to return dueDate value.
+    public final String getDueDate() {
+        return dueDate.get();
+    }
+
+    // getter to return completed value.
+    public boolean getCompleted() {
+        return completed.get();
     }
 
     // setter to initialize this.itemDescription.
@@ -44,19 +55,9 @@ public class itemProperties implements Serializable {
         this.itemDescription.set(itemDescription);
     }
 
-    // getter to return dueDate value.
-    public String getDueDate() {
-        return dueDate.get();
-    }
-
     // setter to initialize this.dueDate.
     public void setDueDate(String dueDate) {
         this.dueDate.set(dueDate);
-    }
-
-    // getter to return completed value.
-    public boolean isCompleted() {
-        return completed.get();
     }
 
     // setter to initialize this.completed.
