@@ -104,6 +104,15 @@ class toDoListControllersTest {
 
     @Test
     void testClearListButton(FxRobot fxRobot) {
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit application assignment 1, part 2");
+
+        fxRobot.moveTo(770, 600);
+        fxRobot.clickOn(770, 600);
+        fxRobot.moveTo(770, 550);
+        fxRobot.clickOn(770, 550);
+        fxRobot.clickOn("#addItemButton");
+
         fxRobot.clickOn("Clear List");
         verifyThat("#itemList", NodeMatchers.hasChild(""));
     }
