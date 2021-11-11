@@ -196,6 +196,15 @@ public class toDoListController implements Initializable {
         add all items of filtered list to uncompleted to do list
         display new uncompleted list in table view.
          */
+
+        Predicate<itemProperties> uncompletedToDo = i -> {
+            return i.getCompleted() == false;
+        };
+
+        filteredList.setPredicate(uncompletedToDo);
+        toDoListUncompleted.addAll(filteredList);
+        itemList.setItems(toDoListUncompleted);
+
     }
 
     @FXML
