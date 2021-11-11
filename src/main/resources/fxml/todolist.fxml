@@ -52,7 +52,7 @@
             </columns>
         </TableView>
         <Pane prefHeight="66.0" prefWidth="794.0" style="-fx-background-color: #98A975;" />
-        <MenuButton fx:id="filterItemsMenuButton" layoutX="695.0" layoutY="66.0" mnemonicParsing="false" onAction="#filterItems" text="Filter Items" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="70.0">
+        <MenuButton layoutX="695.0" layoutY="66.0" mnemonicParsing="false" text="Filter Items" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="70.0">
             <items>
                 <MenuItem fx:id="showCompletedMenuButton" mnemonicParsing="false" onAction="#showCompletedFilter" text="Show Completed Only" />
                 <MenuItem fx:id="showUncompletedMenuButton" mnemonicParsing="false" onAction="#showUncompletedFilter" text="Show Uncompleted Only" />

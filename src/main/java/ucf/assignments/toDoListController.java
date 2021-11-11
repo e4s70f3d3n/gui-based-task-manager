@@ -5,8 +5,12 @@
 
 package ucf.assignments;
 
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -23,9 +27,12 @@ import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class toDoListController implements Initializable {
 
@@ -52,9 +59,6 @@ public class toDoListController implements Initializable {
     private TableColumn<itemProperties, String> dueDateColumn;
 
     @FXML
-    private MenuButton filterItemsMenuButton;
-
-    @FXML
     private TextField itemDescriptionTextField;
 
     @FXML
@@ -78,8 +82,10 @@ public class toDoListController implements Initializable {
     private SimpleBooleanProperty completed;
 
     public ObservableList<itemProperties> toDoList = FXCollections.observableArrayList();
-    public ObservableList<itemProperties> completedToDoList = FXCollections.observableArrayList();
-    public TableView<itemProperties> itemListCompleted = new TableView<>();
+    private ObservableList<itemProperties> toDoListCompleted = FXCollections.observableArrayList();
+    private ObservableList<itemProperties> toDoListUncompleted = FXCollections.observableArrayList();
+    public FilteredList<itemProperties> filteredList = new FilteredList<>(toDoList);
+
 
     @FXML
     void addItem(ActionEvent event) throws ParseException {
@@ -129,10 +135,6 @@ public class toDoListController implements Initializable {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern(updatedFormat));
     }
 
-    void changeCompleted() {
-
-    }
-
     @FXML
     void clearList(ActionEvent event) {
         // retrieves all items from tableview toDoList and clears it.
@@ -140,15 +142,8 @@ public class toDoListController implements Initializable {
     }
 
     @FXML
-    void filterItems(ActionEvent event) {
-        /*
-        default displays all items but menu button allows for access to filters.
-         */
-
-    }
-
-    @FXML
     void removeItem(ActionEvent event) {
+
         /*
         declare list of selected items
         get selected items and remove them from list
@@ -156,23 +151,45 @@ public class toDoListController implements Initializable {
 
         itemProperties selectedItem = itemList.getSelectionModel().getSelectedItem();
         itemList.getItems().remove(selectedItem);
+
     }
 
     @FXML
     void showCompletedFilter(ActionEvent event) {
+
         /*
-        declare a new list
-        for all items that do have completed values marked, add to new list.
+        create predicate for boolean value of getcompleted and set for when
+        completed equals true (i.e. checkbox is checked).
+        set the contents of filtered list to the values that satisfy the predicate.
+        add all items of filtered list to completed to do list
         display new completed list in table view.
          */
+
+        Predicate<itemProperties> completedToDo = i -> {
+            return i.getCompleted() == true;
+        };
+
+        filteredList.setPredicate(completedToDo);
+        toDoListCompleted.addAll(filteredList);
+        itemList.setItems(toDoListCompleted);
+
+    }
+
+    @FXML
+    void showEntireList(ActionEvent event) {
+
+        // display all items on the list.
 
     }
 
     @FXML
     void showUncompletedFilter(ActionEvent event) {
+
         /*
-        declare a new list
-        for all items that do not have completed values marked, add to new list.
+        create predicate for boolean value of getcompleted and set for when
+        completed equals false (i.e. checkbox is not checked).
+        set the contents of filtered list to the values that satisfy the predicate.
+        add all items of filtered list to uncompleted to do list
         display new uncompleted list in table view.
          */
     }
