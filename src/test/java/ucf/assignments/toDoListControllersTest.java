@@ -93,15 +93,6 @@ class toDoListControllersTest {
     void testAddItemButton(FxRobot fxRobot) {
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2");
-
-        fxRobot.clickOn("#datePicker");
-        fxRobot.write("2021-11-15");
-
-        fxRobot.clickOn("#addItemButton");
-
-        FxAssert.verifyThat("#descriptionColumn", TableViewMatchers.hasTableCell("submit application assignment 1, part 2"));
-        FxAssert.verifyThat("#dueDateColumn", TableViewMatchers.hasTableCell("2021-11-15"));
-
     }
 
     @Test

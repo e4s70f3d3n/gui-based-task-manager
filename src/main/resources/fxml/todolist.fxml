@@ -56,7 +56,8 @@
             <items>
                 <MenuItem fx:id="showCompletedMenuButton" mnemonicParsing="false" onAction="#showCompletedFilter" text="Show Completed Only" />
                 <MenuItem fx:id="showUncompletedMenuButton" mnemonicParsing="false" onAction="#showUncompletedFilter" text="Show Uncompleted Only" />
-                <MenuItem fx:id="sortByDueDateMenuButton" mnemonicParsing="false" onAction="#sortByDueDateFilter" text="Sort by Due Date" />
+            <MenuItem fx:id="sortByDueDateAscendingMenuButton" mnemonicParsing="false" onAction="#sortByDueDateAscendingFilter" text="Sort by Due Date Ascending" />
+                <MenuItem fx:id="sortByDueDateDescendingMenuButton" mnemonicParsing="false" onAction="#sortByDueDateDescendingFilter" text="Sort by Due Date Descending" />
             </items>
         </MenuButton>
       <DatePicker fx:id="datePicker" layoutX="295.0" layoutY="487.0" prefHeight="25.0" prefWidth="119.0" promptText="Enter due date" AnchorPane.bottomAnchor="18.0" />

@@ -77,7 +77,10 @@ public class toDoListController implements Initializable {
     private MenuItem showUncompletedMenuButton;
 
     @FXML
-    private MenuItem sortByDueDateMenuButton;
+    private MenuItem sortByDueDateAscendingMenuButton;
+
+    @FXML
+    private MenuItem sortByDueDateDescendingMenuButton;
 
     private SimpleBooleanProperty completed;
 
@@ -208,12 +211,31 @@ public class toDoListController implements Initializable {
     }
 
     @FXML
-    void sortByDueDateFilter(ActionEvent event) {
+    void sortByDueDateAscendingFilter(ActionEvent event) {
+
         /*
         set dueDate table column to setSortType.
-        use SortType.ASCENDING or SortType.DESCENDING to organize values
+        use SortType.ASCENDING to organize values
          */
+
+        dueDateColumn.setSortType(TableColumn.SortType.ASCENDING);
+        itemList.getSortOrder().addAll(dueDateColumn);
+
     }
+
+    @FXML
+    void sortByDueDateDescendingFilter(ActionEvent event) {
+
+        /*
+        set dueDate table column to setSortType.
+        use SortType.DESCENDING to organize values
+         */
+
+        dueDateColumn.setSortType(TableColumn.SortType.DESCENDING);
+        itemList.getSortOrder().addAll(dueDateColumn);
+
+    }
+
 
     @FXML
     void saveList(ActionEvent event) {
