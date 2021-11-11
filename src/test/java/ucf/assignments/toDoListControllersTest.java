@@ -27,7 +27,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.assertions.api.Assertions.assertThat;
+import static org.testfx.matcher.control.TableViewMatchers.hasTableCell;
 import static ucf.assignments.App.viewToDoList;
 
 @ExtendWith(ApplicationExtension.class)
@@ -75,30 +77,34 @@ class toDoListControllersTest {
     void testItemDescriptionTextField(FxRobot fxRobot) {
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2");
-        FxAssert.verifyThat("#itemDescriptionTextField", TextInputControlMatchers.hasText("submit application assignment 1, part 2"));
+        verifyThat("#itemDescriptionTextField", TextInputControlMatchers.hasText("submit application assignment 1, part 2"));
     }
 
 
     @Test
     void testDatePicker(FxRobot fxRobot) {
-        fxRobot.clickOn("#datePicker");
-        fxRobot.write("2021-11-15");
 
-        String expected = "2021-11-15";
-        //assertEquals(expected, datePicker);
-        FxAssert.verifyThat("#datePicker", TextMatchers.hasText("2021-11-15"));
     }
 
     @Test
     void testAddItemButton(FxRobot fxRobot) {
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2");
+
+        fxRobot.moveTo(770, 600);
+        fxRobot.clickOn(770, 600);
+        fxRobot.moveTo(770, 550);
+        fxRobot.clickOn(770, 550);
+        fxRobot.clickOn("#addItemButton");
+
+        verifyThat("#itemList", hasTableCell("submit application assignment 1, part 2"));
+
     }
 
     @Test
     void testClearListButton(FxRobot fxRobot) {
         fxRobot.clickOn("Clear List");
-        FxAssert.verifyThat("#itemList", NodeMatchers.hasChild(""));
+        verifyThat("#itemList", NodeMatchers.hasChild(""));
     }
 
     @org.junit.Test
