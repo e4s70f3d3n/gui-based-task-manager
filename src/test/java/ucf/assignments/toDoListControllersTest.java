@@ -11,6 +11,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -51,6 +52,27 @@ class toDoListControllersTest {
     void tearDown() {
     }
 
+    @BeforeEach
+    void setUp(FxRobot fxRobot) {
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit application assignment 1, part 2");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(740, 575);
+        fxRobot.clickOn("#addItemButton");
+
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("take statistics exam 3");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(760, 575);
+        fxRobot.clickOn("#addItemButton");
+
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit logic project");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(795, 575);
+        fxRobot.clickOn("#addItemButton");
+    }
+
     private static Parent viewToDoList() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/todolist.fxml"));
         Parent parent = fxmlLoader.load();
@@ -87,24 +109,11 @@ class toDoListControllersTest {
          assert actual and expected equals to each other.
           */
 
-        fxRobot.clickOn("#itemDescriptionTextField");
-        fxRobot.write("submit application assignment 1, part 2");
-        fxRobot.clickOn(770, 600);
-        fxRobot.clickOn(725, 575);
-        fxRobot.clickOn("#addItemButton");
-
         verifyThat("#itemList", hasTableCell("submit application assignment 1, part 2"));
     }
 
     @Test
     void testClearListButton(FxRobot fxRobot) {
-        fxRobot.clickOn("#itemDescriptionTextField");
-        fxRobot.write("submit application assignment 1, part 2");
-
-        fxRobot.clickOn(770, 600);
-        fxRobot.clickOn(725, 575);
-        fxRobot.clickOn("#addItemButton");
-
         fxRobot.clickOn("Clear List");
         verifyThat("#itemList", NodeMatchers.hasChild(""));
     }
@@ -127,16 +136,8 @@ class toDoListControllersTest {
         use assertArrayEquals to determine if actual equals expected.
          */
 
-        fxRobot.clickOn("#itemDescriptionTextField");
-        fxRobot.write("submit application assignment 1, part 2");
-
-        fxRobot.clickOn(770, 600);
-        fxRobot.clickOn(725, 575);
-        fxRobot.clickOn("#addItemButton");
-
-        fxRobot.clickOn(770, 225);
         fxRobot.clickOn(450, 228);
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-06"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
     }
 
     @Test
@@ -147,26 +148,28 @@ class toDoListControllersTest {
         assert actual and expected equals to each other.
          */
 
-        fxRobot.clickOn("#itemDescriptionTextField");
-        fxRobot.write("submit application assignment 1, part 2");
-
-        fxRobot.clickOn(770, 600);
-        fxRobot.clickOn(725, 575);
-        fxRobot.clickOn("#addItemButton");
-
         fxRobot.clickOn(770, 225);
         fxRobot.clickOn("#removeItemButton");
-        verifyThat("#itemList", NodeMatchers.hasChild(""));
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
 
     }
 
-    @org.junit.Test
-    void showCompletedFilter() {
-                /*
-                set expected array list of completed todolist values.
-                get actual array list of completed todolist values.
-                use assertArrayEquals to verify expected and actual are true.
-                 */
+    @Test
+    void showCompletedFilter(FxRobot fxRobot) {
+        /*
+        set expected array list of completed todolist values.
+        get actual array list of completed todolist values.
+        use assertArrayEquals to verify expected and actual are true.
+         */
+
+        fxRobot.clickOn(455, 228);
+        fxRobot.clickOn(455, 283);
+        fxRobot.clickOn("Filter Items");
+        fxRobot.clickOn("#showCompletedMenuButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
+
     }
 
     @org.junit.Test
