@@ -140,7 +140,16 @@ class toDoListControllersTest {
     }
 
     @Test
-    void testItemDescriptCannotBeGreatThan265orLessThan1() {
+    void should_NotAddItem_WhenGreaterThan256Characters(FxRobot fxRobot) {
+
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit application assignment 1, part 2, submit practice exercises in c++, submit application assignment in c++ (EXTRA " +
+                "CREDIT), submit computer logic and organization semester project, complete statistics exam 3,  submit statistics homework 5, " +
+                "complete statistics final exam");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(740, 575);
+        fxRobot.clickOn("#addItemButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
 
     }
 
