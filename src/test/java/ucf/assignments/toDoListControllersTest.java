@@ -1,6 +1,5 @@
 package ucf.assignments;
 
-import com.sun.javafx.scene.control.DatePickerContent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,14 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
@@ -23,14 +18,10 @@ import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.*;
 
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.assertions.api.Assertions.assertThat;
 import static org.testfx.matcher.control.TableViewMatchers.hasTableCell;
-import static ucf.assignments.App.viewToDoList;
 
 @ExtendWith(ApplicationExtension.class)
 class toDoListControllersTest {
@@ -78,28 +69,28 @@ class toDoListControllersTest {
         verifyThat("#itemDescriptionTextField", TextInputControlMatchers.hasText("submit application assignment 1, part 2"));
     }
 
-
     @Test
     void testDatePicker(FxRobot fxRobot) {
-        fxRobot.moveTo(770, 600);
         fxRobot.clickOn(770, 600);
-        fxRobot.moveTo(750, 540);
         fxRobot.clickOn(750, 540);
     }
 
     @Test
     void testAddItemButton(FxRobot fxRobot) {
+         /*
+         test a string value in the description text bar.
+         get the actual value from the function.
+         set an expected value based on input.
+         assert actual and expected equals to each other.
+          */
+
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2");
-
-        fxRobot.moveTo(770, 600);
         fxRobot.clickOn(770, 600);
-        fxRobot.moveTo(770, 550);
-        fxRobot.clickOn(770, 550);
+        fxRobot.clickOn(725, 575);
         fxRobot.clickOn("#addItemButton");
 
         verifyThat("#itemList", hasTableCell("submit application assignment 1, part 2"));
-
     }
 
     @Test
@@ -107,10 +98,8 @@ class toDoListControllersTest {
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2");
 
-        fxRobot.moveTo(770, 600);
         fxRobot.clickOn(770, 600);
-        fxRobot.moveTo(770, 550);
-        fxRobot.clickOn(770, 550);
+        fxRobot.clickOn(725, 575);
         fxRobot.clickOn("#addItemButton");
 
         fxRobot.clickOn("Clear List");
@@ -118,50 +107,44 @@ class toDoListControllersTest {
     }
 
     @org.junit.Test
-    void addItem() {
-                /*
-                test a string value in the description text bar.
-                get the actual value from the function.
-                set an expected value based on input.
-                assert actual and expected equals to each other.
-                 */
-    }
-
-    @org.junit.Test
-    void backToList() {
-                /*
-                set the expected scene.
-                get actual scene.
-                assert the expected and actual scenes as equal to each other.
-                 */
-    }
-
-    @org.junit.Test
     void filterItems() {
-                 /*
-                set expected array list of all todolist values.
-                get actual array list of all todolist values.
-                use assertArrayEquals to verify expected and actual are true.
-                 */
+         /*
+        set expected array list of all todolist values.
+        get actual array list of all todolist values.
+        use assertArrayEquals to verify expected and actual are true.
+         */
     }
 
-    @org.junit.Test
-    void checkComplete() {
-                /*
-                set expected array of completed todolist values.
-                get actual values that start as uncompleted values but
-                should be marked as completed if the function works properly.
-                use assertArrayEquals to determine if actual equals expected.
-                 */
+    @Test
+    void checkComplete(FxRobot fxRobot) {
+        /*
+        set expected array of completed todolist values.
+        get actual values that start as uncompleted values but
+        should be marked as completed if the function works properly.
+        use assertArrayEquals to determine if actual equals expected.
+         */
+
     }
 
-    @org.junit.Test
-    void removeItem() {
-                /*
-                test an empty string value in the description text bar.
-                get the actual value from the function.
-                assert actual and expected equals to each other.
-                 */
+    @Test
+    void removeItem(FxRobot fxRobot) {
+        /*
+        test an empty string value in the description text bar.
+        get the actual value from the function.
+        assert actual and expected equals to each other.
+         */
+
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit application assignment 1, part 2");
+
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(725, 575);
+        fxRobot.clickOn("#addItemButton");
+
+        fxRobot.clickOn(770, 225);
+        fxRobot.clickOn("#removeItemButton");
+        verifyThat("#itemList", NodeMatchers.hasChild(""));
+
     }
 
     @org.junit.Test
@@ -169,6 +152,15 @@ class toDoListControllersTest {
                 /*
                 set expected array list of completed todolist values.
                 get actual array list of completed todolist values.
+                use assertArrayEquals to verify expected and actual are true.
+                 */
+    }
+
+    @org.junit.Test
+    void showEntireList() {
+                 /*
+                set expected array list of all todolist values.
+                get actual array list of all todolist values.
                 use assertArrayEquals to verify expected and actual are true.
                  */
     }
@@ -183,10 +175,19 @@ class toDoListControllersTest {
     }
 
     @org.junit.Test
-    void sortByDueDateFilter() {
-                /*
-                set expected array list of sorted todolist values.
-                get actual array list of sorted todolist values.
+    void sortByDueDateAscendingFilter() {
+                 /*
+                set expected array list of all todolist values.
+                get actual array list of all todolist values.
+                use assertArrayEquals to verify expected and actual are true.
+                 */
+    }
+
+    @org.junit.Test
+    void sortByDueDateDescendingFilter() {
+                 /*
+                set expected array list of all todolist values.
+                get actual array list of all todolist values.
                 use assertArrayEquals to verify expected and actual are true.
                  */
     }
