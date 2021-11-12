@@ -157,9 +157,14 @@ class toDoListControllersTest {
     @Test
     void showCompletedFilter(FxRobot fxRobot) {
         /*
-        set expected array list of completed todolist values.
-        get actual array list of completed todolist values.
-        use assertArrayEquals to verify expected and actual are true.
+        click on check boxes for first and third table view items.
+        click on filter items button.
+        click on show completed items button.
+        verify that the table view only contains two rows now instead of the previous 3.
+        verify that the table view contains a row with a completed item titled "submit
+        application assignment 1, part 2" due on "2021-12-07"
+        verify that the table view contains a row with a completed item titled "submit
+        logic project" due on "2021-12-09"
          */
 
         fxRobot.clickOn(455, 228);
@@ -172,22 +177,49 @@ class toDoListControllersTest {
 
     }
 
-    @org.junit.Test
-    void showEntireList() {
-                 /*
-                set expected array list of all todolist values.
-                get actual array list of all todolist values.
-                use assertArrayEquals to verify expected and actual are true.
-                 */
+    @Test
+    void should_VerifyEntireListContentsPresent_when_SwitchingFromCompletedFilter(FxRobot fxRobot) {
+        /*
+        click on check boxes for first and third table view items.
+        click on filter items button.
+        click on show completed items button.
+        verify that the table view only contains two rows now instead of the previous 3.
+        click on show entire list button.
+        verify that the table view now contains all 3 original rows.
+        */
     }
 
-    @org.junit.Test
-    void showUncompletedFilter() {
-                /*
-                set expected array list of uncompleted todolist values.
-                get actual array list of uncompleted todolist values.
-                use assertArrayEquals to verify expected and actual are true.
-                */
+    @Test
+    void should_VerifyEntireListContentsPresent_when_SwitchingFromUncompletedFilter(FxRobot fxRobot) {
+        /*
+        click on check boxes for first and third table view items.
+        click on filter items button.
+        click on show uncompleted items button.
+        verify that the table view only contains one rows now instead of the previous 3.
+        click on show entire list button.
+        verify that the table view now contains all 3 original rows.
+         */
+    }
+
+    @Test
+    void showUncompletedFilter(FxRobot fxRobot) {
+
+         /*
+        click on check boxes for first and third table view items.
+        click on filter items button.
+        click on show uncompleted items button.
+        verify that the table view only contains one rows now instead of the previous 3.
+        verify that the table view contains a row with an uncompleted item titled "take
+        statistics exam 3" due on "2021-12-08"
+         */
+
+        fxRobot.clickOn(455, 228);
+        fxRobot.clickOn(455, 283);
+        fxRobot.clickOn("Filter Items");
+        fxRobot.clickOn("#showUncompletedMenuButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
+
     }
 
     @org.junit.Test
