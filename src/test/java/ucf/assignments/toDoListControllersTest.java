@@ -115,7 +115,7 @@ class toDoListControllersTest {
     @Test
     void testClearListButton(FxRobot fxRobot) {
         fxRobot.clickOn("Clear List");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", NodeMatchers.hasChild(""));
     }
 
@@ -138,7 +138,7 @@ class toDoListControllersTest {
          */
 
         fxRobot.clickOn(450, 228);
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
     }
 
@@ -152,7 +152,7 @@ class toDoListControllersTest {
         fxRobot.clickOn(770, 600);
         fxRobot.clickOn(740, 575);
         fxRobot.clickOn("#addItemButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
 
     }
@@ -165,7 +165,7 @@ class toDoListControllersTest {
         fxRobot.clickOn(770, 600);
         fxRobot.clickOn(740, 575);
         fxRobot.clickOn("#addItemButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
 
     }
@@ -177,7 +177,7 @@ class toDoListControllersTest {
         fxRobot.clickOn(770, 600);
         fxRobot.clickOn(725, 450);
         fxRobot.clickOn("#addItemButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
     }
 
@@ -191,7 +191,7 @@ class toDoListControllersTest {
 
         fxRobot.clickOn(770, 225);
         fxRobot.clickOn("#removeItemButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
     }
 
@@ -220,7 +220,7 @@ class toDoListControllersTest {
         fxRobot.eraseText(20);
         fxRobot.write("submit final draft of logic project");
         fxRobot.press(KeyCode.ENTER);
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit final draft of logic project", "2021-12-09"));
 
     }
@@ -249,7 +249,7 @@ class toDoListControllersTest {
         fxRobot.eraseText(10);
         fxRobot.write("2021-12-13");
         fxRobot.press(KeyCode.ENTER);
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-13"));
 
     }
@@ -275,7 +275,7 @@ class toDoListControllersTest {
         fxRobot.clickOn(455, 283);
         fxRobot.clickOn("Filter Items");
         fxRobot.clickOn("#showCompletedMenuButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
         verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
         verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
@@ -298,7 +298,7 @@ class toDoListControllersTest {
         fxRobot.clickOn(455, 283);
         fxRobot.clickOn("Filter Items");
         fxRobot.clickOn("#showUncompletedMenuButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
         verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
 
@@ -321,7 +321,7 @@ class toDoListControllersTest {
         fxRobot.clickOn("#showCompletedMenuButton");
         verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
         fxRobot.clickOn("#showEntireListButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
         verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
         verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
@@ -345,7 +345,7 @@ class toDoListControllersTest {
         fxRobot.clickOn("#showUncompletedMenuButton");
         verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
         fxRobot.clickOn("#showEntireListButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
         verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
         verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
@@ -380,7 +380,7 @@ class toDoListControllersTest {
 
         fxRobot.clickOn("Filter Items");
         fxRobot.clickOn("#sortByDueDateAscendingMenuButton");
-        fxRobot.sleep(4000);
+        fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(0, false, "submit application assignment 1, part 2", "2021-12-07"));
         verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(1, false, "take statistics exam 3", "2021-12-08"));
         verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(2, false, "submit logic project", "2021-12-09"));
@@ -390,7 +390,8 @@ class toDoListControllersTest {
     }
 
     @Test
-    void sortByDueDateDescendingFilter() {
+    void sortByDueDateDescendingFilter(FxRobot fxRobot) {
+
         /*
         add two new items.
         one with due date 2021-12-18 and the other 2021-12-12
@@ -400,6 +401,28 @@ class toDoListControllersTest {
         text, and due date and use at index to organize by descending date
          */
 
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit practice exercises in c++");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(755, 390);
+        fxRobot.clickOn(850, 500);
+        fxRobot.clickOn("#addItemButton");
+
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit application assignment in c++ (EXTRA CREDIT)");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(755, 390);
+        fxRobot.clickOn(675, 500);
+        fxRobot.clickOn("#addItemButton");
+
+        fxRobot.clickOn("Filter Items");
+        fxRobot.clickOn("#sortByDueDateDescendingMenuButton");
+        fxRobot.sleep(3000);
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(4, false, "submit application assignment 1, part 2", "2021-12-07"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(3, false, "take statistics exam 3", "2021-12-08"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(2, false, "submit logic project", "2021-12-09"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(0, false, "submit practice exercises in c++", "2021-12-18"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(1, false, "submit application assignment in c++ (EXTRA CREDIT)", "2021-12-12"));
 
     }
 }
