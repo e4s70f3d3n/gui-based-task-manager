@@ -8,11 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.input.KeyCode;
 import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -118,7 +117,7 @@ class toDoListControllersTest {
         verifyThat("#itemList", NodeMatchers.hasChild(""));
     }
 
-    @org.junit.Test
+    @Test
     void filterItems() {
          /*
         set expected array list of all todolist values.
@@ -141,6 +140,16 @@ class toDoListControllersTest {
     }
 
     @Test
+    void testItemDescriptCannotBeGreatThan265orLessThan1() {
+
+    }
+
+    @Test
+    void dueDateMustBeValid() {
+
+    }
+
+    @Test
     void removeItem(FxRobot fxRobot) {
         /*
         test an empty string value in the description text bar.
@@ -151,21 +160,81 @@ class toDoListControllersTest {
         fxRobot.clickOn(770, 225);
         fxRobot.clickOn("#removeItemButton");
         verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
+    }
+
+
+    @Test
+    void should_AllowItemDescriptionCellContentEditing_when_TableViewCellIsDoubleClicked(FxRobot fxRobot) {
+
+        /*
+        verify that all three items are contained within the table view:
+        the first row with an uncompleted item titled "submit application assignment 1, part 2" due
+        on "2021-12-07"
+        the second row with an uncompleted item titled "take statistics exam 3" due on "2021-12-08"
+        the third row with an uncompleted item titled "submit logic project" due on "2021-12-09"
+        double click on the item description column cell containing the string "submit logic project"
+        erase the old text
+        write new string "submit final draft of logic project"
+        enter new string value.
+        verify that the table view now contains a third row with an uncompleted item titled "submit
+        final draft logic project" due on "2021-12-09"
+        */
+
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit application assignment 1, part 2", "2021-12-07"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit logic project", "2021-12-09"));
+        fxRobot.doubleClickOn("submit logic project");
+        fxRobot.eraseText(20);
+        fxRobot.write("submit final draft of logic project");
+        fxRobot.press(KeyCode.ENTER);
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit final draft of logic project", "2021-12-09"));
 
     }
 
     @Test
-    void showCompletedFilter(FxRobot fxRobot) {
+    void should_AllowDueDateCellContentEditing_when_TableViewCellIsDoubleClicked(FxRobot fxRobot) {
+
         /*
-        click on check boxes for first and third table view items.
-        click on filter items button.
-        click on show completed items button.
-        verify that the table view only contains two rows now instead of the previous 3.
-        verify that the table view contains a row with a completed item titled "submit
-        application assignment 1, part 2" due on "2021-12-07"
-        verify that the table view contains a row with a completed item titled "submit
-        logic project" due on "2021-12-09"
-         */
+        verify that all three items are contained within the table view:
+        the first row with an uncompleted item titled "submit application assignment 1, part 2" due
+        on "2021-12-07"
+        the second row with an uncompleted item titled "take statistics exam 3" due on "2021-12-08"
+        the third row with an uncompleted item titled "submit logic project" due on "2021-12-09"
+        double click on the due date column cell containing the string "2021-12-08"
+        erase the old text
+        write new string "2021-12-13"
+        enter new string value.
+        verify that the table view now contains a third row with an uncompleted item titled "take
+        statistics exam 3" due on "2021-12-13"
+        */
+
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit application assignment 1, part 2", "2021-12-07"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit logic project", "2021-12-09"));
+        fxRobot.doubleClickOn("2021-12-08");
+        fxRobot.eraseText(10);
+        fxRobot.write("2021-12-13");
+        fxRobot.press(KeyCode.ENTER);
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-13"));
+
+    }
+
+
+
+
+
+    @Test
+    void showCompletedFilter(FxRobot fxRobot) {
+    /*
+    click on check boxes for first and third table view items.
+    click on filter items button.
+    click on show completed items button.
+    verify that the table view only contains two rows now instead of the previous 3.
+    verify that the table view contains a row with a completed item titled "submit
+    application assignment 1, part 2" due on "2021-12-07"
+    verify that the table view contains a row with a completed item titled "submit
+    logic project" due on "2021-12-09"
+     */
 
         fxRobot.clickOn(455, 228);
         fxRobot.clickOn(455, 283);
@@ -174,6 +243,27 @@ class toDoListControllersTest {
         verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
         verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
         verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
+
+    }
+
+    @Test
+    void showUncompletedFilter(FxRobot fxRobot) {
+
+         /*
+        click on check boxes for first and third table view items.
+        click on filter items button.
+        click on show uncompleted items button.
+        verify that the table view only contains one rows now instead of the previous 3.
+        verify that the table view contains a row with an uncompleted item titled "take
+        statistics exam 3" due on "2021-12-08"
+         */
+
+        fxRobot.clickOn(455, 228);
+        fxRobot.clickOn(455, 283);
+        fxRobot.clickOn("Filter Items");
+        fxRobot.clickOn("#showUncompletedMenuButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
 
     }
 
@@ -224,27 +314,6 @@ class toDoListControllersTest {
     }
 
     @Test
-    void showUncompletedFilter(FxRobot fxRobot) {
-
-         /*
-        click on check boxes for first and third table view items.
-        click on filter items button.
-        click on show uncompleted items button.
-        verify that the table view only contains one rows now instead of the previous 3.
-        verify that the table view contains a row with an uncompleted item titled "take
-        statistics exam 3" due on "2021-12-08"
-         */
-
-        fxRobot.clickOn(455, 228);
-        fxRobot.clickOn(455, 283);
-        fxRobot.clickOn("Filter Items");
-        fxRobot.clickOn("#showUncompletedMenuButton");
-        verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
-
-    }
-
-    @Test
     void sortByDueDateAscendingFilter() {
                  /*
                 set expected array list of all todolist values.
@@ -262,6 +331,7 @@ class toDoListControllersTest {
                  */
     }
 }
+
 
 
 
