@@ -154,6 +154,18 @@ class toDoListControllersTest {
     }
 
     @Test
+    void should_NotAddItem_WhenLessThan1Character(FxRobot fxRobot) {
+
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(740, 575);
+        fxRobot.clickOn("#addItemButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
+
+    }
+
+    @Test
     void dueDateMustBeValid() {
 
     }
