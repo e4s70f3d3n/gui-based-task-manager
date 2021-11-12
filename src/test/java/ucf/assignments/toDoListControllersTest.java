@@ -187,6 +187,17 @@ class toDoListControllersTest {
         click on show entire list button.
         verify that the table view now contains all 3 original rows.
         */
+
+        fxRobot.clickOn(455, 228);
+        fxRobot.clickOn(455, 283);
+        fxRobot.clickOn("Filter Items");
+        fxRobot.clickOn("#showCompletedMenuButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
+        fxRobot.clickOn("#showEntireListButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
     }
 
     @Test
@@ -199,6 +210,17 @@ class toDoListControllersTest {
         click on show entire list button.
         verify that the table view now contains all 3 original rows.
          */
+
+        fxRobot.clickOn(455, 228);
+        fxRobot.clickOn(455, 283);
+        fxRobot.clickOn("Filter Items");
+        fxRobot.clickOn("#showUncompletedMenuButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
+        fxRobot.clickOn("#showEntireListButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
     }
 
     @Test
@@ -222,7 +244,7 @@ class toDoListControllersTest {
 
     }
 
-    @org.junit.Test
+    @Test
     void sortByDueDateAscendingFilter() {
                  /*
                 set expected array list of all todolist values.
@@ -231,7 +253,7 @@ class toDoListControllersTest {
                  */
     }
 
-    @org.junit.Test
+    @Test
     void sortByDueDateDescendingFilter() {
                  /*
                 set expected array list of all todolist values.
