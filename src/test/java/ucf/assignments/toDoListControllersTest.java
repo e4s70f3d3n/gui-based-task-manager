@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,7 @@ import org.testfx.matcher.control.*;
 
 import java.io.IOException;
 
+import static javafx.scene.control.cell.CheckBoxTableCell.forTableColumn;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.assertions.api.Assertions.assertThat;
 import static org.testfx.matcher.control.TableViewMatchers.hasTableCell;
@@ -116,7 +119,7 @@ class toDoListControllersTest {
     }
 
     @Test
-    void checkComplete(FxRobot fxRobot) {
+    void checkCompleted(FxRobot fxRobot) {
         /*
         set expected array of completed todolist values.
         get actual values that start as uncompleted values but
@@ -124,6 +127,16 @@ class toDoListControllersTest {
         use assertArrayEquals to determine if actual equals expected.
          */
 
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("submit application assignment 1, part 2");
+
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(725, 575);
+        fxRobot.clickOn("#addItemButton");
+
+        fxRobot.clickOn(770, 225);
+        fxRobot.clickOn(450, 228);
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-06"));
     }
 
     @Test
