@@ -140,7 +140,7 @@ class toDoListControllersTest {
     }
 
     @Test
-    void should_NotAddItem_WhenGreaterThan256Characters(FxRobot fxRobot) {
+    void should_NotAddItem_when_GreaterThan256Characters(FxRobot fxRobot) {
 
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2, submit practice exercises in c++, submit application assignment in c++ (EXTRA " +
@@ -154,7 +154,7 @@ class toDoListControllersTest {
     }
 
     @Test
-    void should_NotAddItem_WhenLessThan1Character(FxRobot fxRobot) {
+    void should_NotAddItem_when_LessThan1Character(FxRobot fxRobot) {
 
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("");
@@ -166,8 +166,13 @@ class toDoListControllersTest {
     }
 
     @Test
-    void dueDateMustBeValid() {
-
+    void should_NotAddItem_when_DueDateIsNotValid(FxRobot fxRobot) {
+        fxRobot.clickOn("#itemDescriptionTextField");
+        fxRobot.write("");
+        fxRobot.clickOn(770, 600);
+        fxRobot.clickOn(725, 450);
+        fxRobot.clickOn("#addItemButton");
+        verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
     }
 
     @Test
