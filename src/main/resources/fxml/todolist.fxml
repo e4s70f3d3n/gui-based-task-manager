@@ -44,7 +44,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.toDoListController">
     <children>
-        <TableView fx:id="itemList" layoutX="31.0" layoutY="101.0" prefHeight="374.0" prefWidth="732.0">
+        <TableView fx:id="itemList" layoutX="31.0" layoutY="101.0" prefHeight="374.0" prefWidth="732.0" AnchorPane.leftAnchor="31.0">
             <columns>
                 <TableColumn fx:id="completedColumn" prefWidth="106.39996910095215" text="Completed" />
                 <TableColumn fx:id="descriptionColumn" prefWidth="462.8000183105469" text="Item Description" />
@@ -66,5 +66,11 @@
       <Button fx:id="addItemButton" layoutX="220.0" layoutY="487.0" mnemonicParsing="false" onAction="#addItem" text="Add Item" AnchorPane.bottomAnchor="18.0" />
       <Button fx:id="showEntireListButton" layoutX="14.0" layoutY="487.0" mnemonicParsing="false" onAction="#showEntireList" text="Show Entire List" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="14.0" />
       <Button fx:id="clearListButton" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#clearList" prefHeight="25.0" prefWidth="91.0" text="Clear List" AnchorPane.leftAnchor="14.0" />
+      <MenuButton layoutX="586.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Save/Load">
+        <items>
+          <MenuItem fx:id="saveListMenuButton" mnemonicParsing="false" onAction="#saveList" text="Save List to External Storage" />
+          <MenuItem fx:id="loadListMenuButton" mnemonicParsing="false" onAction="#loadList" text="Load List from External Storage" />
+        </items>
+      </MenuButton>
     </children>
 </AnchorPane>

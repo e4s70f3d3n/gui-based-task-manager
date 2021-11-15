@@ -2,61 +2,57 @@
 'https://plantuml.com/class-diagram
 
 Class App {
-- main()
-- start()
++ main()
++ start()
 - viewToDoList()
 }
 
 class itemProperties {
-    + itemDescription: SimpleStringProperty
-    + dueDate: SimpleStringProperty
-    + completed: SimpleStringProperty
+    - itemDescription: SimpleStringProperty
+    - dueDate: SimpleStringProperty
+    - completed: SimpleBooleanProperty
 
-    - itemProperties(itemDescription, dueDate)
-    - getItemDescription()
-    - setItemDescription(itemDescription)
-    - getDueDate()
-    - setDueDate(dueDate)
-    - getCompleted()
-    - setCompleted(completed)
-}
-
-class listsController {
-+ location: URL
-+ resources: ResourceBundle
-+ actionEvent: ActionEvent
-
-- addItems(ActionEvent)
-- addList(ActionEvent)
-- deleteList(ActionEvent)
-- saveList(ActionEvent)
-- loadList(ActionEvent)
-- fileSaver()
-- fileLoader()
-- Initialize(location, resources)
-}
-
-class toDoList {
-    + listName: SimpleStringProperty
-    + itemPropertiesObservableList: itemObservableList
-
-    - toDoList(listName)
-    - getListName()
-    - setListName(listName)
-    - getItemObservableList()
-    - setItemObservableList(itemObservableList)
+    + itemProperties(itemDescription, dueDate)
+    + getItemDescription()
+    + setItemDescription(itemDescription)
+    + getDueDate()
+    + setDueDate(dueDate)
+    + getCompleted()
+    + setCompleted(completed)
+    + itemDescriptionProperty(itemDescription)
+    + dueDateProperty(dueDate)
+    + completedProperty(completed)
 }
 
 class toDoListController {
-    - addItem(ActionEvent)
-    - backToList(ActionEvent)
-    - checkComplete(ActionEvent)
-    - filterItems(ActionEvent)
-    - removeItem(ActionEvent)
-    - showCompletedFilter(ActionEvent)
-    - showUncompletedFilter(ActionEvent)
-    - sortByDueDateFilter(ActionEvent)
-    - Initialize(location, resources)
+    - completed: SimpleBooleanProperty
+    - toDoListCompleted: ObservableList<itemProperties>
+    - toDoListUncompleted: ObservableList<itemProperties>
+    + toDoList: ObservableList<itemProperties>
+    + location: URL
+    + resources: ResourceBundle
+    + actionEvent: ActionEvent
+
+    - filteredList: FilteredList<itemProperties>(toDoList)
+    + addItem(ActionEvent)
+    + formatDueDate(Date Picker)
+    + clearList(ActionEvent)
+    + removeItem(ActionEvent)
+    + showCompletedFilter(ActionEvent)
+    + showEntireList(ActionEvent)
+    + showUncompletedFilter(ActionEvent)
+    + sortByDueDateAscendingFilter(ActionEvent)
+    + sortByDueDateDescendingFilter(ActionEvent)
+    + saveList(ActionEvent)
+    + loadList(ActionEvent)
+    + Initialize(location, resources)
+
+}
+
+class toDoListController {
+
+
+
 }
 
 

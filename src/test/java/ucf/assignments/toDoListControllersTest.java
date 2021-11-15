@@ -6,24 +6,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.matcher.control.*;
+import org.testfx.matcher.control.TableViewMatchers;
+import org.testfx.matcher.control.TextInputControlMatchers;
 
 import java.io.IOException;
 
-import static javafx.scene.control.cell.CheckBoxTableCell.forTableColumn;
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.assertions.api.Assertions.assertThat;
 import static org.testfx.matcher.control.TableViewMatchers.hasTableCell;
 
 @ExtendWith(ApplicationExtension.class)
@@ -46,6 +47,7 @@ class toDoListControllersTest {
 
 
     public ObservableList<itemProperties> toDoList = FXCollections.observableArrayList();
+    private String dateString;
 
     @AfterEach
     void tearDown() {
@@ -88,6 +90,11 @@ class toDoListControllersTest {
 
     @Test
     void testItemDescriptionTextField(FxRobot fxRobot) {
+        /*
+        click on item description text field
+        write "submit application assignment 1, part 2" into text field.
+        verify that the text field contains the expected text.
+         */
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2");
         verifyThat("#itemDescriptionTextField", TextInputControlMatchers.hasText("submit application assignment 1, part 2"));
@@ -95,6 +102,10 @@ class toDoListControllersTest {
 
     @Test
     void testDatePicker(FxRobot fxRobot) {
+        /*
+        select due date 2021-12-12 from date picker.
+         */
+
         fxRobot.clickOn(770, 600);
         fxRobot.clickOn(755, 390);
         fxRobot.clickOn(675, 500);
@@ -103,10 +114,7 @@ class toDoListControllersTest {
     @Test
     void testAddItemButton(FxRobot fxRobot) {
          /*
-         test a string value in the description text bar.
-         get the actual value from the function.
-         set an expected value based on input.
-         assert actual and expected equals to each other.
+         assert that item list has a cell containing the listed string.
           */
 
         verifyThat("#itemList", hasTableCell("submit application assignment 1, part 2"));
@@ -114,27 +122,20 @@ class toDoListControllersTest {
 
     @Test
     void testClearListButton(FxRobot fxRobot) {
+        /*
+        click clear list button.
+        assure that item list is empty
+         */
         fxRobot.clickOn("Clear List");
         fxRobot.sleep(3000);
         verifyThat("#itemList", NodeMatchers.hasChild(""));
     }
 
     @Test
-    void filterItems() {
-         /*
-        set expected array list of all todolist values.
-        get actual array list of all todolist values.
-        use assertArrayEquals to verify expected and actual are true.
-         */
-    }
-
-    @Test
     void checkCompleted(FxRobot fxRobot) {
         /*
-        set expected array of completed todolist values.
-        get actual values that start as uncompleted values but
-        should be marked as completed if the function works properly.
-        use assertArrayEquals to determine if actual equals expected.
+        click on check mark in completed column for item at index 0 to mark as completed.
+        use verify that to ensure the cell value changed from false to true.
          */
 
         fxRobot.clickOn(450, 228);
@@ -145,6 +146,14 @@ class toDoListControllersTest {
     @Test
     void should_NotAddItem_when_GreaterThan256Characters(FxRobot fxRobot) {
 
+        /*
+        click on item description text field.
+        write text into field that is greater than 256 characters.
+        click on valid date.
+        click on add item button.
+        verify that item list has 3 rows since item was not added.
+         */
+
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("submit application assignment 1, part 2, submit practice exercises in c++, submit application assignment in c++ (EXTRA " +
                 "CREDIT), submit computer logic and organization semester project, complete statistics exam 3,  submit statistics homework 5, " +
@@ -154,11 +163,18 @@ class toDoListControllersTest {
         fxRobot.clickOn("#addItemButton");
         fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
-
     }
 
     @Test
     void should_NotAddItem_when_LessThan1Character(FxRobot fxRobot) {
+
+        /*
+        click on item description text field.
+        write nothing into text field.
+        click on valid date.
+        click on add item button.
+        verify that item list has 3 rows since item was not added.
+         */
 
         fxRobot.clickOn("#itemDescriptionTextField");
         fxRobot.write("");
@@ -171,9 +187,20 @@ class toDoListControllersTest {
     }
 
     @Test
+    void should_ReturnEmptyList_when_ItemDescriptionFieldIsEmpty(FxRobot fxRobot) {
+        /*
+        leave item field empty.
+        check that list is empty when that occurs.
+         */
+
+        itemProperties toDoList = new itemProperties("", "2021-12-15");
+        verifyThat("#itemList", hasTableCell(null));
+    }
+
+    @Test
     void should_NotAddItem_when_DueDateIsNotValid(FxRobot fxRobot) {
         fxRobot.clickOn("#itemDescriptionTextField");
-        fxRobot.write("");
+        fxRobot.write("submit practice exercises in c++");
         fxRobot.clickOn(770, 600);
         fxRobot.clickOn(725, 450);
         fxRobot.clickOn("#addItemButton");
@@ -254,22 +281,18 @@ class toDoListControllersTest {
 
     }
 
-
-
-
-
     @Test
     void showCompletedFilter(FxRobot fxRobot) {
-    /*
-    click on check boxes for first and third table view items.
-    click on filter items button.
-    click on show completed items button.
-    verify that the table view only contains two rows now instead of the previous 3.
-    verify that the table view contains a row with a completed item titled "submit
-    application assignment 1, part 2" due on "2021-12-07"
-    verify that the table view contains a row with a completed item titled "submit
-    logic project" due on "2021-12-09"
-     */
+        /*
+        click on check boxes for first and third table view items.
+        click on filter items button.
+        click on show completed items button.
+        verify that the table view only contains two rows now instead of the previous 3.
+        verify that the table view contains a row with a completed item titled "submit
+        application assignment 1, part 2" due on "2021-12-07"
+        verify that the table view contains a row with a completed item titled "submit
+        logic project" due on "2021-12-09"
+         */
 
         fxRobot.clickOn(455, 228);
         fxRobot.clickOn(455, 283);
@@ -319,6 +342,7 @@ class toDoListControllersTest {
         fxRobot.clickOn(455, 283);
         fxRobot.clickOn("Filter Items");
         fxRobot.clickOn("#showCompletedMenuButton");
+        fxRobot.sleep(1500);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
         fxRobot.clickOn("#showEntireListButton");
         fxRobot.sleep(3000);
@@ -343,6 +367,7 @@ class toDoListControllersTest {
         fxRobot.clickOn(455, 283);
         fxRobot.clickOn("Filter Items");
         fxRobot.clickOn("#showUncompletedMenuButton");
+        fxRobot.sleep(1500);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
         fxRobot.clickOn("#showEntireListButton");
         fxRobot.sleep(3000);
@@ -425,7 +450,32 @@ class toDoListControllersTest {
         verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(1, false, "submit application assignment in c++ (EXTRA CREDIT)", "2021-12-12"));
 
     }
+
+    @Test
+    void testSaveListMenuButton(FxRobot fxRobot) {
+        /*
+        click on Save/Load button.
+        click on save list button.
+        */
+        fxRobot.clickOn("Save/Load");
+        fxRobot.clickOn("#saveListMenuButton");
+        fxRobot.sleep(3000);
+    }
+
+    @Test
+    void testLoadListMenuButton(FxRobot fxRobot) {
+        /*
+        click on Save/Load button.
+        click on load list button.
+        */
+        fxRobot.clickOn("Save/Load");
+        fxRobot.clickOn("#loadListMenuButton");
+        fxRobot.sleep(3000);
+    }
+
+
 }
+
 
 
 

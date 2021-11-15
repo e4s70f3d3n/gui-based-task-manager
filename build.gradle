@@ -5,10 +5,18 @@ plugins {
 group 'ucf.assignments'
 version '1.0-SNAPSHOT'
 
-repositories { mavenCentral() }
+repositories { mavenCentral()
+    maven {
+        url 'https://maven.pkg.jetbrains.space/public/p/compose/dev'
+        name 'Compose for Desktop DEV'
+    }
+}
 
 dependencies {
     implementation 'junit:junit:4.13.1'
+    implementation 'org.jetbrains.compose.desktop:desktop:0.5.0-build270'
+    implementation 'org.webjars:jsonfile:1.1.1'
+    implementation 'com.l2fprod.common:l2fprod-common-directorychooser:6.9.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     testImplementation "org.testfx:testfx-junit5:4.0.16-alpha"

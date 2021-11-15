@@ -1,0 +1,5 @@
+false,submit application assignment 1, part 2,2021-12-07
+false,take statistics exam 3,2021-12-08
+false,submit logic project,2021-12-09
+true,submit practice exercises in c++,2021-12-18
+submit application assignment in c++ (EXTRA CREDIT),2021-12-12

@@ -5,34 +5,32 @@
 
 package ucf.assignments;
 
-import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
 
 public class toDoListController implements Initializable {
 
@@ -65,7 +63,13 @@ public class toDoListController implements Initializable {
     private TableView<itemProperties> itemList;
 
     @FXML
+    private MenuItem loadListMenuButton;
+
+    @FXML
     private Button removeItemButton;
+
+    @FXML
+    private MenuItem saveListMenuButton;
 
     @FXML
     private MenuItem showCompletedMenuButton;
@@ -84,15 +88,22 @@ public class toDoListController implements Initializable {
 
     private SimpleBooleanProperty completed;
 
+    private static Scene scene;
+    public static Stage stage1;
+
     public ObservableList<itemProperties> toDoList = FXCollections.observableArrayList();
     private ObservableList<itemProperties> toDoListCompleted = FXCollections.observableArrayList();
     private ObservableList<itemProperties> toDoListUncompleted = FXCollections.observableArrayList();
-    public FilteredList<itemProperties> filteredList = new FilteredList<>(toDoList);
+    private FilteredList<itemProperties> filteredList = new FilteredList<>(toDoList);
+    FileChooser fileChooser = new FileChooser();
+
 
 
     @FXML
     void addItem(ActionEvent event) throws ParseException {
          /*
+         restrict the add item function so that if the date is not valid, if the item description is less than one character
+         or greater than 256, the item will not be input.
         use the text from itemDescriptionTextField to create a new item description.
         use the value from the datePicker to get the date. convert it to a string with format of YYYY-MM-DD.
         add new item to the table view.
@@ -111,6 +122,10 @@ public class toDoListController implements Initializable {
     }
 
     public String formatDueDate(DatePicker datePicker) throws ParseException {
+        /*
+        format the date so that it appears in the table view as only yyyy-MM-dd.
+        ensure to string and from local date.
+         */
         String updatedFormat = "yyyy-MM-dd";
 
         datePicker.setPromptText(updatedFormat.toLowerCase(Locale.ROOT));
@@ -236,52 +251,22 @@ public class toDoListController implements Initializable {
 
     }
 
-
     @FXML
     void saveList(ActionEvent event) {
         /*
-        call function fileSaver();
+        call file chooser show save dialog stage
          */
+        File file = fileChooser.showSaveDialog(new Stage());
     }
+
 
     @FXML
-    void loadList(ActionEvent event) {
+    void loadList(ActionEvent event) throws FileNotFoundException {
         /*
-        call function fileLoader();
+        call file chooser show open dialog stage
          */
+        File file = fileChooser.showOpenDialog(new Stage());
     }
-
-    public void fileSaver() {
-        /*
-        declare an observable list and have it get the selected items.
-        start try
-            declare a pathway for new FileWriter inside a new BufferedWriter inside a new PrintWriter.
-                **(the path utilized for this project was "C:\\Users\\easto\\IdeaProjects\\vitulli-cop3330
-                -assignment\\src\\main\\resources\\txt files\\todolists.txt" and the appropriate directory
-                is attached in my repository for when my project is fully functional.
-            start for loop at i equals zero and continue as long as i is less than the size of the
-            array incrementing by 1
-                get i of the array and save in the value items
-                write item to file
-            close file
-         */
-    }
-
-    public void fileLoader() {
-        /*
-        start try
-            declare a pathway for FileReader. declare buffered reader with filereader.
-                **(the path utilized for this project was "C:\\Users\\easto\\IdeaProjects\\vitulli-cop3330
-                -assignment\\src\\main\\resources\\txt files\\todolists.txt" and the appropriate directory
-                is attached in my repository for when my project is fully functional.
-            set a string line to empty.
-
-            start while loop if buffered reader line contains content
-                declare new to do list and get the text content from the listsTextField.
-                get the items stored within that to do list and store within new todolist.
-         */
-    }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -290,6 +275,7 @@ public class toDoListController implements Initializable {
         set table to allow for multiple selection mode.
         set table so cells are editable.
         initialize the text field of the cells in the tableview.
+        initialize the text field of the cells in the tableview completed column to check box.
          */
         completedColumn.setCellValueFactory(new PropertyValueFactory<>("completed"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("itemDescription"));

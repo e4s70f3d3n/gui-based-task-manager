@@ -23,7 +23,6 @@ public class itemProperties implements Serializable {
     StringProperty dueDate, and BooleanProperty completed) designating each as private.
     */
 
-
     public itemProperties(String itemDescription, String dueDate) {
         this.itemDescription = new SimpleStringProperty(itemDescription);
         this.dueDate = new SimpleStringProperty(dueDate);
