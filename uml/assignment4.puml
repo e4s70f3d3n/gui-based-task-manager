@@ -49,11 +49,4 @@ class toDoListController {
 
 }
 
-class toDoListController {
-
-
-
-}
-
-
 @enduml
