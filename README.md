@@ -24,6 +24,12 @@ Simple to do list application created with JavaFX
 #### Display All Existing Items in the List
 - To display all existing items in the list, click the “Show Entire List” button.
 
+#### Sort by Due Date Descending
+- To display the to do list items sorted by due date in descending order, click the “Filter Items” menu button and then select the "Sort by Due Date Descending" button from the drop down selection.
+
+#### Sort by Due Date Ascending
+- To display the to do list items sorted by due date in ascending order, click the “Filter Items” menu button and then select the "Sort by Due Date Ascending" button from the drop down selection.
+
 #### Display Only the Uncompleted Items in the List
 - To display only the uncompleted items in the list, click the “Filter Items” menu button and then select the “Show Uncompleted Only” button from the drop down selection.
 
@@ -35,3 +41,4 @@ Simple to do list application created with JavaFX
 
 #### Load a List (and all of its items) from External Storage
 - To load a list (and all of its items) from external storage, click the “Save/Load” menu button and then select the “Load List from External Storage” button from the drop down selection.
+

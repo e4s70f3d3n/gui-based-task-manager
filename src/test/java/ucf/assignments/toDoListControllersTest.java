@@ -35,7 +35,7 @@ import static org.testfx.matcher.control.TableViewMatchers.hasTableCell;
 class toDoListControllersTest {
 
     private static Scene scene;
-    public static Stage stage1;
+    private static Stage stage1;
     @FXML
     private TableColumn<itemProperties, Boolean> completedColumn;
     @FXML
