@@ -6,11 +6,9 @@
 package ucf.assignments;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,10 +17,12 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    public static Stage stage1;
-    @FXML
-    private TableView<itemProperties> itemList;
+    private static Stage stage1;
 
+    /*
+    display stage by calling viewToDoList function
+    set stage to non resizable.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(viewToDoList());
@@ -32,6 +32,9 @@ public class App extends Application {
         stage1.setResizable(false);
     }
 
+    /*
+    launch fxml file
+     */
     private static Parent viewToDoList() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/todolist.fxml"));
         Parent parent = fxmlLoader.load();

@@ -2,6 +2,9 @@
 'https://plantuml.com/class-diagram
 
 Class App {
+- stage1: Stage
+- scene: Scene
+
 + main()
 + start()
 - viewToDoList()
@@ -48,5 +51,9 @@ class toDoListController {
     + Initialize(location, resources)
 
 }
+
+toDoListController -> App
+itemProperties -> toDoListController
+App -> itemProperties
 
 @enduml

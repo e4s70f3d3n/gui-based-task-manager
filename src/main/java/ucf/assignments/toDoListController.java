@@ -97,8 +97,6 @@ public class toDoListController implements Initializable {
     private FilteredList<itemProperties> filteredList = new FilteredList<>(toDoList);
     FileChooser fileChooser = new FileChooser();
 
-
-
     @FXML
     void addItem(ActionEvent event) throws ParseException {
          /*
