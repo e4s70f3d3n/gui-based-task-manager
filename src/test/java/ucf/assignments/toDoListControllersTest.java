@@ -11,7 +11,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,10 +47,6 @@ class toDoListControllersTest {
 
     public ObservableList<itemProperties> toDoList = FXCollections.observableArrayList();
     private String dateString;
-
-    @AfterEach
-    void tearDown() {
-    }
 
     @BeforeEach
     void setUp(FxRobot fxRobot) {
