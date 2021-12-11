@@ -103,7 +103,7 @@ class toDoListControllersTest {
     @Test
     void testDatePicker(FxRobot fxRobot) {
         /*
-        select due date 2021-12-12 from date picker.
+        select due date 2022-01-09 from date picker.
          */
 
         fxRobot.clickOn(770, 600);
@@ -140,7 +140,7 @@ class toDoListControllersTest {
 
         fxRobot.clickOn(450, 228);
         fxRobot.sleep(3000);
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2022-01-04"));
     }
 
     @Test
@@ -229,26 +229,26 @@ class toDoListControllersTest {
         /*
         verify that all three items are contained within the table view:
         the first row with an uncompleted item titled "submit application assignment 1, part 2" due
-        on "2021-12-07"
-        the second row with an uncompleted item titled "take statistics exam 3" due on "2021-12-08"
-        the third row with an uncompleted item titled "submit logic project" due on "2021-12-09"
+        on "2022-01-04"
+        the second row with an uncompleted item titled "take statistics exam 3" due on "2022-01-05"
+        the third row with an uncompleted item titled "submit logic project" due on "2022-01-06"
         double click on the item description column cell containing the string "submit logic project"
         erase the old text
         write new string "submit final draft of logic project"
         enter new string value.
         verify that the table view now contains a third row with an uncompleted item titled "submit
-        final draft logic project" due on "2021-12-09"
+        final draft logic project" due on "2022-01-06"
         */
 
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit application assignment 1, part 2", "2021-12-07"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit logic project", "2021-12-09"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit application assignment 1, part 2", "2022-01-04"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2022-01-05"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit logic project", "2022-01-06"));
         fxRobot.doubleClickOn("submit logic project");
         fxRobot.eraseText(20);
         fxRobot.write("submit final draft of logic project");
         fxRobot.press(KeyCode.ENTER);
         fxRobot.sleep(3000);
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit final draft of logic project", "2021-12-09"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit final draft of logic project", "2022-01-06"));
 
     }
 
@@ -258,26 +258,26 @@ class toDoListControllersTest {
         /*
         verify that all three items are contained within the table view:
         the first row with an uncompleted item titled "submit application assignment 1, part 2" due
-        on "2021-12-07"
-        the second row with an uncompleted item titled "take statistics exam 3" due on "2021-12-08"
+        on "2022-01-04"
+        the second row with an uncompleted item titled "take statistics exam 3" due on "2022-01-05"
         the third row with an uncompleted item titled "submit logic project" due on "2021-12-09"
-        double click on the due date column cell containing the string "2021-12-08"
+        double click on the due date column cell containing the string "2022-01-06"
         erase the old text
-        write new string "2021-12-13"
+        write new string "2022-01-13"
         enter new string value.
         verify that the table view now contains a third row with an uncompleted item titled "take
-        statistics exam 3" due on "2021-12-13"
+        statistics exam 3" due on "2022-01-13"
         */
 
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit application assignment 1, part 2", "2021-12-07"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit logic project", "2021-12-09"));
-        fxRobot.doubleClickOn("2021-12-08");
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit application assignment 1, part 2", "2022-01-04"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2022-01-05"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "submit logic project", "2022-01-06"));
+        fxRobot.doubleClickOn("2022-01-05");
         fxRobot.eraseText(10);
-        fxRobot.write("2021-12-13");
+        fxRobot.write("2022-01-13");
         fxRobot.press(KeyCode.ENTER);
         fxRobot.sleep(3000);
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-13"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2022-01-13"));
 
     }
 
@@ -289,9 +289,9 @@ class toDoListControllersTest {
         click on show completed items button.
         verify that the table view only contains two rows now instead of the previous 3.
         verify that the table view contains a row with a completed item titled "submit
-        application assignment 1, part 2" due on "2021-12-07"
+        application assignment 1, part 2" due on "2022-01-04"
         verify that the table view contains a row with a completed item titled "submit
-        logic project" due on "2021-12-09"
+        logic project" due on "2022-01-06"
          */
 
         fxRobot.clickOn(455, 228);
@@ -300,8 +300,8 @@ class toDoListControllersTest {
         fxRobot.clickOn("#showCompletedMenuButton");
         fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(2));
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2022-01-04"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2022-01-06"));
 
     }
 
@@ -314,7 +314,7 @@ class toDoListControllersTest {
         click on show uncompleted items button.
         verify that the table view only contains one rows now instead of the previous 3.
         verify that the table view contains a row with an uncompleted item titled "take
-        statistics exam 3" due on "2021-12-08"
+        statistics exam 3" due on "2022-01-05"
          */
 
         fxRobot.clickOn(455, 228);
@@ -323,7 +323,7 @@ class toDoListControllersTest {
         fxRobot.clickOn("#showUncompletedMenuButton");
         fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(1));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2022-01-05"));
 
     }
 
@@ -347,9 +347,9 @@ class toDoListControllersTest {
         fxRobot.clickOn("#showEntireListButton");
         fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2022-01-04"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2022-01-05"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2022-01-06"));
     }
 
     @Test
@@ -372,9 +372,9 @@ class toDoListControllersTest {
         fxRobot.clickOn("#showEntireListButton");
         fxRobot.sleep(3000);
         verifyThat("#itemList", TableViewMatchers.hasNumRows(3));
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2021-12-07"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2021-12-08"));
-        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2021-12-09"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit application assignment 1, part 2", "2022-01-04"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(false, "take statistics exam 3", "2022-01-05"));
+        verifyThat("#itemList", TableViewMatchers.containsRow(true, "submit logic project", "2022-01-06"));
     }
 
     @Test
@@ -382,7 +382,7 @@ class toDoListControllersTest {
 
          /*
         add two new items.
-        one with due date 2021-12-18 and the other 2021-12-12
+        one with due date "2022-01-15" and the other "2022-01-09"
         click on filter items button.
         click on sort by due date ascending button.
         verify that each of the five items have the proper associated boolean value,
@@ -406,11 +406,11 @@ class toDoListControllersTest {
         fxRobot.clickOn("Filter Items");
         fxRobot.clickOn("#sortByDueDateAscendingMenuButton");
         fxRobot.sleep(3000);
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(0, false, "submit application assignment 1, part 2", "2021-12-07"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(1, false, "take statistics exam 3", "2021-12-08"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(2, false, "submit logic project", "2021-12-09"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(4, false, "submit practice exercises in c++", "2021-12-18"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(3, false, "submit application assignment in c++ (EXTRA CREDIT)", "2021-12-12"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(0, false, "submit application assignment 1, part 2", "2022-01-04"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(1, false, "take statistics exam 3", "2022-01-05"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(2, false, "submit logic project", "2022-01-06"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(4, false, "submit practice exercises in c++", "2022-01-15"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(3, false, "submit application assignment in c++ (EXTRA CREDIT)", "2022-01-09"));
 
     }
 
@@ -419,7 +419,7 @@ class toDoListControllersTest {
 
         /*
         add two new items.
-        one with due date 2021-12-18 and the other 2021-12-12
+        one with due date "2022-01-15" and the other "2022-01-09"
         click on filter items button.
         click on sort by due date ascending button.
         verify that each of the five items have the proper associated boolean value,
@@ -443,11 +443,11 @@ class toDoListControllersTest {
         fxRobot.clickOn("Filter Items");
         fxRobot.clickOn("#sortByDueDateDescendingMenuButton");
         fxRobot.sleep(3000);
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(4, false, "submit application assignment 1, part 2", "2021-12-07"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(3, false, "take statistics exam 3", "2021-12-08"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(2, false, "submit logic project", "2021-12-09"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(0, false, "submit practice exercises in c++", "2021-12-18"));
-        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(1, false, "submit application assignment in c++ (EXTRA CREDIT)", "2021-12-12"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(4, false, "submit application assignment 1, part 2", "2022-01-04"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(3, false, "take statistics exam 3", "2022-01-05"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(2, false, "submit logic project", "2022-01-06"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(0, false, "submit practice exercises in c++", "2022-01-15"));
+        verifyThat("#itemList", TableViewMatchers.containsRowAtIndex(1, false, "submit application assignment in c++ (EXTRA CREDIT)", "2022-01-09"));
 
     }
 
@@ -473,8 +473,8 @@ class toDoListControllersTest {
         fxRobot.sleep(3000);
     }
 
-
 }
+
 
 
 
