@@ -32,8 +32,8 @@ This project is a Java-based GUI desktop application designed for managing a per
 ### Steps to Run
 1. **Clone the Repository**:
    ```sh
-   > git clone https://github.com/e4s70f3d3n/vitulli-cop3330-assignment4part2.git
-   > cd vitulli-cop3330-assignment4part2
+   > git clone https://github.com/e4s70f3d3n/gui-based-task-manager.git
+   > cd gui-based-task-manager
    ```
 2. **Build and Run**:
    - Open the project in IntelliJ IDEA.
